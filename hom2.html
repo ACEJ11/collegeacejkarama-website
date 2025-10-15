@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="/apple-touch-icon.png" type="image/x-icon" rel="stylesheet"/>
+    <title>S6 Accountng Login </title>
+    <style>
+        
+        .button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF; 
+            color: white; 
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px; 
+        }
+        .button-link:hover {
+            background-color: #0056b3; 
+        }
+        #number{background-color: cadetblue;}
+    </style>
+</head>
+<body align="center">
+    <script>
+        function validateForms(){
+            let x = document.forms["josiane"]["username"].value;
+            if (x =="") {
+                alert("please enter your username");
+                return false;
+            }
+        }
+        </script>
+    <div class="login-container"id="login-conainer" align="center">
+        <h2>Login</h2>
+        <form class="solid" action="/registration.php?categoryid">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <label for="password" padding="10px">Password</label>
+            <input type="number" id="Number" name="Number" required>
+            <br><br>
+           <input type="submit" value="submit" id="mgb"> <a href="htmlsddmsdmdfknfgikivjiugygfuikmfiiqk11317u354334.html" class="button-link" target="_parent" onclick="return validateForms()">Login</a>
+        </form>
+    </div>
+</body>
+</html>
