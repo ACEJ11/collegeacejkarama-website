@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>50-Question Online Quiz</title>
+<style>
+ body { font-family: Arial, sans-serif; margin: 20px; }
+ .question { margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 8px; }
+ .wrong { background: #ffe5e5; }
+ .correct { background: #e5ffe5; }
+</style>
+</head>
+<body>
+<h1>61 Multiple Choice Questions </h1>
+<form id="quizForm"></form>
+<button onclick="submitQuiz()">Submit</button>
+<div id="result"></div>
+
+<script>
+const questions = [
+
+{q:"I always___ to school.",a:["go","goes","am going"], c:1},
+{q:"she didn't realize what was happening bacause she___ when the announcement was made.",a:["slept","was sleeping","had slept","had been sleeping"], c:3},
+{q:"The longer he talked, the more confused I ______.",a:["become","became","have become","had become"],c:1},
+{q:"By the time you get home, I ______ dinner and will be waiting for you.",a:["will finish","will have finished","have finished","will be finishing"],c:1},
+{q:"The students ______ for two hours before the teacher arrived.",a:["study","were studying","had been studying","have studied"],c:2},
+{q:"If he ______ earlier, he wouldn't have missed the bus.",a:["leaves","left","had left","has left"],c:2},
+{q:"At this rate, they ______ the project before the deadline.",a:["will finish","will have finished","finish","are finishing"],c:1},
+{q:"She ______ in the choir since she was a child",a:["sang","sings","has sung","had sung"],c:2},
+{q:"While she ______ the speech, the microphone went off.",a:["has given","gave","is giving","was giving"],c:3},
+{q:"At the age of 50, he realized he ______ his life doing the wrong job.",a:["spends","spent","has spent","had spent"],c:3},
+{q:"14. She ______ at the company since she graduated from university.",a:["works","worked","has worked","had worked"],c:2},
+ {q:"The work ___ by John.", a:["is done","was doing","did"], c:0},
+ {q:"The letter was ___ yesterday.", a:["write","wrote","written"], c:2},
+ {q:"The children ___ the game.", a:["are played","play","played by"], c:1},
+ {q:"Dinner is ___ now.", a:["served","serving","serve"], c:0},
+ {q:"The songs were ___ by the choir.", a:["sang","sung","sing"], c:1},
+ {q:"The ball was ___ by him.", a:["kick","kicking","kicked"], c:2},
+ {q:"She ___ the story.", a:["told","was telling","tells"], c:2},
+ {q:"The homework was ___.", a:["finish","finished","finishing"], c:1},
+ {q:"English is ___ worldwide.", a:["speak","spoken","speaking"], c:1},
+ {q:"The room ___ every day.", a:["is cleaned","cleaned","was cleaning"], c:0},
+ {q:"The cake was ___ by Mary.", a:["baked","bake","baking"], c:0},
+ {q:"The movie ___ by many people.", a:["was watched","watched","watching"], c:0},
+ {q:"The car ___ by the mechanic.", a:["was repaired","repaired","repairing"], c:0},
+ {q:"They ___ the tasks.", a:["completed","were completed","completing"], c:0},
+ {q:"The door was ___.", a:["lock","locked","locks"], c:1},
+ {q:"The flowers ___ by her.", a:["are watered","watered","was watering"], c:0},
+ {q:"The parcels were ___ yesterday.", a:["deliver","delivered","delivering"], c:1},
+ {q:"The teacher ___ the notes.", a:["explains","explained by","explain"], c:0},
+ {q:"The book was ___ in 1990.", a:["publish","published","publishing"], c:1},
+ {q:"They ___ the match.", a:["won","was won","winning"], c:0},
+ {q:"The work is ___ by students.", a:["do","did","done"], c:2},
+ {q:"The game ___ yesterday.", a:["was played","played","play"], c:0},
+ {q:"The story was ___ by him.", a:["write","written","writes"], c:1},
+ {q:"The food ___ now.", a:["is cooked","cooked","cooking"], c:0},
+ {q:"The windows were ___.", a:["clean","cleaning","cleaned"], c:2},
+ {q:"Water is ___ by plants.", a:["absorbed","absorbing","absorb"], c:0},
+ {q:"The prize was ___ by Sarah.", a:["win","won","winning"], c:1},
+ {q:"The clothes were ___.", a:["washing","washed","wash"], c:1},
+ {q:"The news was ___ today.", a:["announce","announced","announcing"], c:1},
+ {q:"They ___ the house.", a:["paint","painted by","painting"], c:0},
+ {q:"The house was ___ last week.", a:["painted","painting","paint"], c:0},
+ {q:"The letter ___ now.", a:["is typed","typed","typing"], c:0},
+ {q:"The crops were ___.", a:["harvest","harvested","harvesting"], c:1},
+ {q:"The bag was ___ by Tom.", a:["carry","carried","carrying"], c:1},
+ {q:"They ___ the song.", a:["sing","sang","sung by"], c:1},
+ {q:"The meeting was ___.", a:["hold","held","holding"], c:1},
+ {q:"The project ___ by the team.", a:["completed","was completed","completing"], c:1},
+ {q:"The wall was ___.", a:["build","built","building"], c:1},
+ {q:"They ___ the car.", a:["fix","fixed by","fixed"], c:2},
+ {q:"The test was ___ yesterday.", a:["write","written","wrote"], c:1},
+ {q:"The song ___ now.", a:["is played","played","playing"], c:0},
+ {q:"The water was ___.", a:["boil","boiled","boiling"], c:1},
+ {q:"She ___ the door.", a:["opened","was opened","opening"], c:0},
+ {q:"The report was ___ by him.", a:["prepare","prepared","preparing"], c:1},
+ {q:"The lights were ___.", a:["switch","switched","switching"], c:1},
+ {q:"The trees were ___.", a:["cut","cutting","cutted"], c:0},
+ {q:"They ___ the rules.", a:["follow","followed by","followed"], c:2},
+ {q:"The bread was ___.", a:["bake","baked","baking"], c:1},
+ {q:"The road was ___ last year.", a:["construct","constructed","constructing"], c:1},
+ {q:"The work ___ tomorrow.", a:["will be done","will do","done"], c:0}
+];
+
+const form = document.getElementById("quizForm");
+questions.forEach((q,i)=>{
+ let div = document.createElement("div");
+ div.className = "question";
+ div.innerHTML = `<p><b>${i+1}. ${q.q}</b></p>` +
+ q.a.map((opt,j)=> `<label><input type='radio' name='q${i}' value='${j}'> ${opt}</label><br>`).join("");
+ form.appendChild(div);
+});
+
+function submitQuiz(){
+ let score = 0;
+ document.querySelectorAll('.question').forEach((div,i)=>{
+   const selected = document.querySelector(`input[name='q${i}']:checked`);
+   div.classList.remove('correct','wrong');
+   if(selected){
+      if(parseInt(selected.value) === questions[i].c){ score++; div.classList.add('correct'); }
+      else{ div.classList.add('wrong'); }
+   } else { div.classList.add('wrong'); }
+ });
+ document.getElementById('result').innerHTML = `<h2>Your Score: ${score}/50</h2>`;
+}
+</script>
+
+</body>
+</html>
