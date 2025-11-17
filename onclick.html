@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>English Tenses Quiz with Feedback</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h1 { text-align: center; }
+    .question { margin-bottom: 20px; }
+    .option { margin: 5px 0; }
+    #submit { margin-top: 20px; padding: 10px 20px; }
+    #result { margin-top: 20px; font-weight: bold; }
+    .wrong { color: red; margin-top: 5px; }
+    .correct { color: green; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <h1>English Tenses Quiz</h1>
+
+  <form id="quizForm">
+    <!-- Question 1 -->
+    <div class="question">
+      <p>1. She ______ to school every day.</p>
+      <input type="radio" name="q1" value="A"> A. go<br>
+      <input type="radio" name="q1" value="B"> B. goes<br>
+      <input type="radio" name="q1" value="C"> C. is going<br>
+      <input type="radio" name="q1" value="D"> D. went<br>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="question">
+      <p>2. They ______ TV when I arrived.</p>
+      <input type="radio" name="q2" value="A"> A. watch<br>
+      <input type="radio" name="q2" value="B"> B. watched<br>
+      <input type="radio" name="q2" value="C"> C. were watching<br>
+      <input type="radio" name="q2" value="D"> D. have watched<br>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="question">
+      <p>3. I ______ the project before the deadline yesterday.</p>
+      <input type="radio" name="q3" value="A"> A. finish<br>
+      <input type="radio" name="q3" value="B"> B. finished<br>
+      <input type="radio" name="q3" value="C"> C. had finished<br>
+      <input type="radio" name="q3" value="D"> D. have finished<br>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Question 4 -->
+    <div class="question">
+      <p>4. She usually ______ breakfast at 7 AM.</p>
+      <input type="radio" name="q4" value="A"> A. is eating<br>
+      <input type="radio" name="q4" value="B"> B. eats<br>
+      <input type="radio" name="q4" value="C"> C. ate<br>
+      <input type="radio" name="q4" value="D"> D. has eaten<br>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Question 5 -->
+    <div class="question">
+      <p>5. By next week, they ______ the house.</p>
+      <input type="radio" name="q5" value="A"> A. will paint<br>
+      <input type="radio" name="q5" value="B"> B. will be painting<br>
+      <input type="radio" name="q5" value="C"> C. will have painted<br>
+      <input type="radio" name="q5" value="D"> D. paint<br>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Question 6 -->
+    <div class="question">
+      <p>6. When I called her, she ______.</p>
+      <input type="radio" name="q6" value="A"> A. sleeps<br>
+      <input type="radio" name="q6" value="B"> B. is sleeping<br>
+      <input type="radio" name="q6" value="C"> C. was sleeping<br>
+      <input type="radio" name="q6" value="D"> D. slept<br>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Question 7 -->
+    <div class="question">
+      <p>7. She ______ in this company since 2015.</p>
+      <input type="radio" name="q7" value="A"> A. works<br>
+      <input type="radio" name="q7" value="B"> B. worked<br>
+      <input type="radio" name="q7" value="C"> C. has worked<br>
+      <input type="radio" name="q7" value="D"> D. had worked<br>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Question 8 -->
+    <div class="question">
+      <p>8. She ______ the movie three times.</p>
+      <input type="radio" name="q8" value="A"> A. sees<br>
+      <input type="radio" name="q8" value="B"> B. saw<br>
+      <input type="radio" name="q8" value="C"> C. has seen<br>
+      <input type="radio" name="q8" value="D"> D. had seen<br>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Question 9 -->
+    <div class="question">
+      <p>9. While he ______ the dishes, the phone rang.</p>
+      <input type="radio" name="q9" value="A"> A. washed<br>
+      <input type="radio" name="q9" value="B"> B. has washed<br>
+      <input type="radio" name="q9" value="C"> C. was washing<br>
+      <input type="radio" name="q9" value="D"> D. washes<br>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Question 10 -->
+    <div class="question">
+      <p>10. By 8 PM, I ______ for three hours.</p>
+      <input type="radio" name="q10" value="A"> A. will study<br>
+      <input type="radio" name="q10" value="B"> B. will be studying<br>
+      <input type="radio" name="q10" value="C"> C. will have studied<br>
+      <input type="radio" name="q10" value="D"> D. will have been studying<br>
+      <div class="feedback"></div>
+    </div>
+
+    <button type="button" id="submit" onclick="calculateScore()">Submit</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    const answers = {
+      q1: "B",
+      q2: "C",
+      q3: "C",
+      q4: "B",
+      q5: "C",
+      q6: "C",
+      q7: "C",
+      q8: "C",
+      q9: "C",
+      q10: "D"
+    };
+
+    function calculateScore() {
+      let score = 0;
+      let wrongQuestions = [];
+      for (let i = 1; i <= 10; i++) {
+        const selected = document.querySelector(`input[name=q${i}]:checked`);
+        const feedback = document.querySelector(`input[name=q${i}]`).parentElement.querySelector('.feedback');
+
+        if (selected) {
+          if (selected.value === answers[`q${i}`]) {
+            score++;
+            feedback.textContent = "Correct!";
+            feedback.className = "feedback correct";
+          } else {
+            feedback.textContent = `Incorrect! Correct answer: ${answers[`q${i}`]}`;
+            feedback.className = "feedback wrong";
+            wrongQuestions.push(i);
+          }
+        } else {
+          feedback.textContent = `No answer selected! Correct answer: ${answers[`q${i}`]}`;
+          feedback.className = "feedback wrong";
+          wrongQuestions.push(i);
+        }
+      }
+
+      let resultText = `You scored ${score} out of 10.`;
+      if (wrongQuestions.length > 0) {
+        resultText += ` You got questions wrong: ${wrongQuestions.join(", ")}.`;
+      }
+      document.getElementById("result").textContent = resultText;
+    }
+  </script>
+</body>
+</html>
