@@ -8,19 +8,43 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
     <style>
-        .in{display: inline-block;
-            position: absolute;
-            cursor: pointer;
-           }
-        
-        .in:hover.out{display: block;}
-        .c11 {color: #000}
- .out{
-     display: none;
-    background-color: #00fff2e0;
-    
-    color: #000;
-    text-decoration: none;}
+ .in{display: inline-block;
+    position:relative;
+    cursor: pointer;
+    color:#000;
+}
+.may{
+float: right;
+border-radius: 10px;
+background-color: #ffc0cb;
+width: 100px;
+text-shadow: 4px 4px 5px grey ;}
+.may:hover{color:#ffff00;
+
+border-radius: 10px;
+background-color: #d87093;}
+.may:hover .out{display: block;
+}
+.out{background-color: #008000;
+border-radius: 10px;
+padding: 10px;
+top: 100%;
+position:initial;
+
+white-space: nowrap;
+z-index: 100;
+left:0;
+display: none;}
+
+ .out:hover{background-color: #ffff00;
+border-radius: 10px;
+}
+.out a{background-color:#ffff00 ;
+    color:#008000;
+    border-radius: 10px;
+}
+.out a:hover{background-color: #008000;
+color:#ffff00;}
     #eric{color: #000;}
 
 
@@ -517,6 +541,7 @@ to{background-color: none; top:0px;left:0px}
 
 
 </html>
+
 
 
 
